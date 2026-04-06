@@ -363,7 +363,7 @@ impl Module for Rros {
         // test_double_linked_list();
 
         // test_clock();
-        test_thread();
+        // test_thread();
         //test_double_linked_list();
         // wait::wait_test();
         let ret = net::init();
@@ -375,7 +375,7 @@ impl Module for Rros {
             }
         }
 
-        test_mem();
+        // test_mem();
         match res {
             Ok(_o) => {
                 pr_info!("Success boot the rros.");
@@ -386,9 +386,9 @@ impl Module for Rros {
                 return Err(_e);
             }
         }
-        test_lantency();
+        // test_lantency();
 
-        test_smp();
+        // test_smp();
 
         // let mut rros_kthread1 = rros_kthread::new(fn1);
         // let mut rros_kthread2 = rros_kthread::new(fn2);

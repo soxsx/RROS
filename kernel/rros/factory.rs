@@ -803,7 +803,6 @@ fn rros_create_factory(
                 }
 
                 inside.class = Some(Arc::try_new(class::Class::new(
-                    this_module,
                     name.as_char_ptr(),
                 )?)?);
                 let mut type_ = device::DeviceType::new().name(name.as_char_ptr());
@@ -1073,7 +1072,6 @@ pub fn rros_early_init_factories(
     // };
 
     let mut rros_class: Arc<class::Class> = Arc::try_new(class::Class::new(
-        this_module,
         CStr::from_bytes_with_nul("rros\0".as_bytes())?.as_char_ptr(),
     )?)?;
     // TODO: create a structure to implement rros_devnode.

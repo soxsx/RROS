@@ -11,7 +11,6 @@ use crate::{bindings, c_types, device, error::Error, Result};
 extern "C" {
     #[allow(improper_ctypes)]
     fn rust_helper_class_create(
-        this_module: &'static crate::ThisModule,
         buf: *const c_types::c_char,
     ) -> *mut bindings::class;
     #[allow(dead_code)]
@@ -40,10 +39,9 @@ pub struct Class(*mut bindings::class);
 impl Class {
     /// The `new` method is a constructor for `Class`. It takes a reference to the current module and a name, and creates a new device class. If the creation fails, it returns an `EBADF` error.
     pub fn new(
-        this_module: &'static crate::ThisModule,
         name: *const c_types::c_char,
     ) -> Result<Self> {
-        let ptr = class_create(this_module, name);
+        let ptr = class_create(name);
         if ptr.is_null() {
             return Err(Error::EBADF);
         }
@@ -66,8 +64,7 @@ impl Class {
 
 /// The `class_create` function is a helper function that creates a new device class. It takes a reference to the current module and a name, and returns a raw pointer to the created class./// The `DevT` struct is a wrapper around the `bindings::dev_t` struct from the kernel bindings. It represents a device type.
 fn class_create(
-    this_module: &'static crate::ThisModule,
     name: *const c_types::c_char,
 ) -> *mut bindings::class {
-    unsafe { rust_helper_class_create(this_module, name) }
+    unsafe { rust_helper_class_create(name) }
 }

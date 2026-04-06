@@ -456,6 +456,7 @@ $(obj)/bindings.o: $(src)/bindings/lib.rs \
 
 $(obj)/uapi.o: $(src)/uapi/lib.rs \
     $(obj)/compiler_builtins.o \
+    $(obj)/bindings.o \
     $(obj)/uapi/uapi_generated.rs FORCE
 	$(call if_changed_dep,rustc_library)
 

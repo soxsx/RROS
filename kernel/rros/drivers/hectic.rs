@@ -784,7 +784,6 @@ impl Module for Hecticdev {
         }
 
         let hectic_class: Arc<class::Class> = Arc::try_new(class::Class::new(
-            &THIS_MODULE,
             CStr::from_bytes_with_nul("hectic\0".as_bytes())?.as_char_ptr(),
         )?)?;
 
