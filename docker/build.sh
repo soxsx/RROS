@@ -23,6 +23,7 @@ docker run --rm \
             echo '--- Running defconfig ---'
             make -C /src ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- LLVM=1 defconfig
             echo '--- Enabling RROS options ---'
+            echo "CONFIG_RUST=y"          >> /src/.config
             echo "CONFIG_RROS=y"         >> /src/.config
             echo "CONFIG_RROS_OOB_NET=y" >> /src/.config
             make -C /src ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- LLVM=1 olddefconfig
