@@ -18,16 +18,13 @@ docker run --rm \
     "$IMAGE" \
     bash -c "
         set -e
-        # Load defconfig if .config is absent
-        if [ ! -f /src/.config ]; then
-            echo '--- Running defconfig ---'
-            make -C /src ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- LLVM=1 defconfig
-            echo '--- Enabling RROS options ---'
-            echo "CONFIG_RUST=y"          >> /src/.config
-            echo "CONFIG_RROS=y"         >> /src/.config
-            echo "CONFIG_RROS_OOB_NET=y" >> /src/.config
-            make -C /src ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- LLVM=1 olddefconfig
-        fi
+        echo '--- Running defconfig ---'
+        make -C /src ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- LLVM=1 defconfig
+        echo '--- Enabling RROS options ---'
+        echo "CONFIG_RUST=y"          >> /src/.config
+        echo "CONFIG_RROS=y"         >> /src/.config
+        echo "CONFIG_RROS_OOB_NET=y" >> /src/.config
+        make -C /src ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- LLVM=1 olddefconfig
         echo '--- Building kernel ---'
         make -C /src ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- LLVM=1 -j\$(nproc) \"\$@\"
     " -- "$@"
